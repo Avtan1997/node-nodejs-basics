@@ -1,14 +1,13 @@
 import { mkdir, copyFile, readdir} from 'node:fs/promises';
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
-
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 export const copy = async () => {
   const source = join(__dirname, 'files')
   const destination = join(__dirname, 'files_copy')
-  const existErrorMsg = 'FS operation failed'
+  const isExistErrorMsg = 'FS operation failed'
 
   try {
     await mkdir(destination);
@@ -20,7 +19,7 @@ export const copy = async () => {
     console.log(' Files was copied');
   } catch (err) {
     if (err.code === 'EEXIST') {
-      console.error(existErrorMsg)
+      console.error(isExistErrorMsg)
     } else {
       throw err
     }
